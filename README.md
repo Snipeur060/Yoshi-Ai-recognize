@@ -4,7 +4,13 @@
 
 <p id="description">This ai aims to find the yoshie in a photo from a pre trained model</p>
 
-<p align="center"><img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&amp;logo=tensorflow&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/Windows_11-0078D6?style=for-the-badge&amp;logo=windows&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&amp;logo=linux&amp;logoColor=black" alt="shields"><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white" alt="shields"></p>
+<p align="center"><img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&amp;logo=tensorflow&amp;logoColor=white" alt="shields">
+  
+  <img src="https://img.shields.io/badge/Windows_11-0078D6?style=for-the-badge&amp;logo=windows&amp;logoColor=white" alt="shields">
+  
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&amp;logo=linux&amp;logoColor=black" alt="shields">
+  
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white" alt="shields"></p>
 
   
   
