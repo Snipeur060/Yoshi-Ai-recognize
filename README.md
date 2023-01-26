@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/Snipeur060/Yoshi-Ai-recognize/image?font=Jost&amp;language=1&amp;logo=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F15658638%3Fs%3D280%26v%3D4&amp;name=1&amp;pattern=Circuit%20Board&amp;theme=Dark" alt="project-image"></p>
 
-<p id="description">This ai aims to find the yoshie in a photo from a pre trained model</p>
+<p id="description">This ai aims to find the Yoshi in a photo from a pre trained model</p>
 
 <p align="center"><img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&amp;logo=tensorflow&amp;logoColor=white" alt="shields">
   
