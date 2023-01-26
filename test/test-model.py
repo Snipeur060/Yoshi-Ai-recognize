@@ -3,7 +3,7 @@ from keras.preprocessing import image
 import numpy as np
 
 # Charger le modèle
-model = load_model('yoshi_model_keras.h5')
+model = load_model('../keras_model.h5')
 
 # Charger les données d'évaluation
 eval_data = np.array([image.img_to_array(image.load_img('eval_data/image1.jpg', target_size=(224, 224)))])
