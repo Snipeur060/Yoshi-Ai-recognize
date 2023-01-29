@@ -29,9 +29,10 @@ Here're some of the project's best features:
 This project is licensed under the GNU Affero General Public License v3.0
 
 <h2>❔ Informations:</h2>
-Here the success rate corresponds to what probability the ai has found the image Example: 0.49 this means that she thinks that at 49% the image is a yoshi
 
-Here the failure rate and the inverse of the success rate Example: 0.49 is the probability determined by the ai that the image does not see Yoshi
+ * Here the success rate corresponds to what probability the ai has found the image Example: 0.49 this means that she thinks that at 49% the image is a yoshi
+
+ * Here the failure rate and the inverse of the success rate Example: 0.49 is the probability determined by the ai that the image does not see Yoshi
 
 <h2>💖Like my work?</h2>
 
