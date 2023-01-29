@@ -4,13 +4,13 @@ from keras.models import load_model
 from time import time
 
 # Load the model
-model = load_model('keras_model.h5')
+model = load_model('../keras_model/keras_model.h5')
 
 # CAMERA can be 0 or 1 based on default camera of your computer.
 camera = cv2.VideoCapture(0)
 
 # Grab the labels from the labels.txt file. This will be used later.
-labels = open('labels.txt', 'r').readlines()
+labels = open('../keras_model/labels.txt', 'r').readlines()
 
 while True:
     # Grab the webcameras image.
