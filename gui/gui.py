@@ -9,14 +9,14 @@ from PIL import Image, ImageOps  # Install pillow instead of PIL
 from pathlib import Path
 
 # Charger le modèle keras
-model = load_model("keras_model.h5")
+model = load_model("../keras_model/keras_model.h5")
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
 
 
 def select_image():
     # Load the labels
-    class_names = open('labels.txt', 'r').readlines()
+    class_names = open('../keras_model/labels.txt', 'r').readlines()
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
     file_path_to_analyze = filedialog.askopenfilename()
     # Replace this with the path to your image
