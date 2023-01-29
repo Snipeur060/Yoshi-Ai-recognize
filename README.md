@@ -39,4 +39,5 @@ This project is licensed under the GNU Affero General Public License v3.0
 You can contact me here snipeur060@gmail.com
 
 
-<img src="https://media0.giphy.com/media/EZNeKoejp9fuo/giphy.gif" />
+<!--<img src="https://media0.giphy.com/media/EZNeKoejp9fuo/giphy.gif" />-->
+<img src="https://64.media.tumblr.com/7e27ea4954e49d8e8c685b4385a6f306/3b5d0ec8eae36845-3e/s500x750/2443a4e6a136d867a697ac229950a4f7665893bc.gif" />
