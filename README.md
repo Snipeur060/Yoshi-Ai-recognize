@@ -11,7 +11,10 @@
   <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&amp;logo=linux&amp;logoColor=black" alt="shields">
   <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&amp;logo=python&amp;logoColor=white" alt="shields"></p>
 
-  
+
+<h2>Project Screenshots:</h2>
+
+<img src="https://github.com/Snipeur060/Yoshi-Ai-recognize/blob/main/readme_assets/gui_image.png?raw=true" alt="project-screenshot" width="1205" height="862" />
   
 <h2>🧐 Features</h2>
 
