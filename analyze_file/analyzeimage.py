@@ -45,4 +45,4 @@ while True:
     print('Class:', class_name, end='')
     print('Confidence score:', confidence_score)
   except:
-    print("Be careful, your path may not be right (mistletoe is strongly recommended)")
+    print("Be careful, your path may not be right (gui.py is strongly recommended)")
