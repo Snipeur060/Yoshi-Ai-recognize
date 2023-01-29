@@ -11,7 +11,7 @@ model = load_model('../keras_model/keras_Model.h5', compile=False)
 # Load the labels
 class_names = open('../keras_model/labels.txt', 'r').readlines()
 
-while true:
+while True:
   imgpath = input("Le chemin de votre Image --> ")
   # Create the array of the right shape to feed into the keras model
   # The 'length' or number of images you can put into the array is
