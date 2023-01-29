@@ -37,3 +37,6 @@ This project is licensed under the GNU Affero General Public License v3.0
 <h2>💖Like my work?</h2>
 
 You can contact me here snipeur060@gmail.com
+
+
+<img src="https://media0.giphy.com/media/EZNeKoejp9fuo/giphy.gif" />
