@@ -1,3 +1,5 @@
+__version__ = '0.1.3'
+
 from keras.models import load_model
 from PIL import Image, ImageOps #Install pillow instead of PIL
 import numpy as np
