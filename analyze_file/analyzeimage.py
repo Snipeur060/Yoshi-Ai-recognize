@@ -1,6 +1,7 @@
 from keras.models import load_model
 from PIL import Image, ImageOps #Install pillow instead of PIL
 import numpy as np
+import cv2
 
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
@@ -29,7 +30,9 @@ while True:
 
     #turn the image into a numpy array
     image_array = np.asarray(image)
-
+    #Noise removal using a Gaussian filter with OpenCV 
+    #This should improve image quality
+    image_array = cv2.GaussianBlur(image_array, (5, 5), 0)
     # Normalize the image
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
 
