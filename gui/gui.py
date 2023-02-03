@@ -71,7 +71,7 @@ def select_image():
 
     # turn the image into a numpy array
     image_array = np.asarray(image)
-    image_array = cv2.GaussianBlur(image_array, (5, 5), 0)
+    #image_array = cv2.GaussianBlur(image_array, (5, 5), 0)
     # Normalize the image
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
 
