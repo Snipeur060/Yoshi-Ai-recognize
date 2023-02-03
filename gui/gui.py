@@ -1,8 +1,10 @@
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 import tkinter
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from tkinter import filedialog
+
+import cv2
 from keras.models import load_model
 import numpy as np
 from PIL import Image, ImageOps  # Install pillow instead of PIL
@@ -69,7 +71,7 @@ def select_image():
 
     # turn the image into a numpy array
     image_array = np.asarray(image)
-
+    image_array = cv2.GaussianBlur(image_array, (5, 5), 0)
     # Normalize the image
     normalized_image_array = (image_array.astype(np.float32) / 127.0) - 1
 
