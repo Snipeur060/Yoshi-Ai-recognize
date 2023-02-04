@@ -11,7 +11,7 @@
     <script>
       async function predict() {
         // Load the model.
-        const modelURL = 'YOUR_MODEL_URL';
+        const modelURL = 'model/model.json';
         const model = await tf.loadLayersModel(modelURL);
       
         // Get the input image and add preprocessing.
