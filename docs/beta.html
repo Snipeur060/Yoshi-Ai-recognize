@@ -1,42 +1,45 @@
-<input type="file" id="input-image" accept="image/*">
-<div id="output"></div>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.4.0/dist/tf.min.js"></script>
+  </head>
+  <body>
+    <input type="file" id="image-selector">
+    <br><br>
+    <div id="prediction"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
-<script>
-const fileReader = new FileReader();
-fileReader.readAsDataURL(file);
-fileReader.onload = async () => {
-  const image = new Image();
-  image.src = fileReader.result;
-  await image.decode();
-  const tensor = tf.browser.fromPixels(image);
-};
+    <script>
+      const imageSelector = document.getElementById('image-selector');
+      const predictionDiv = document.getElementById('prediction');
 
-async function loadModel() {
-  // Charger le modèle entraîné
-  const model = await tf.loadLayersModel('model/model.json');
-  return model;
-}
+      // Load the model.
+      const modelURL = 'model/model.json';
+      const model = await tf.loadLayersModel(modelURL);
 
-async function predict(model) {
-  // Récupérer l'image sélectionnée par l'utilisateur
-  const image = inputImage.files[0];
+      // Load the image.
+      imageSelector.addEventListener('change', async () => {
+        const image = imageSelector.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = async () => {
+          const img = new Image();
+          img.src = reader.result;
+          img.width = 227;
+          img.height = 227;
+          document.body.appendChild(img);
 
-  // Prédire la classe de l'image en utilisant le modèle
-  const prediction = await model.predict(tf.browser.fromPixels(image)).data();
+          // Predict the image.
+          const tensor = tf.browser.fromPixels(img).resizeNearestNeighbor([227, 227]).toFloat().expandDims();
+          const predictions = await model.predict(tensor).data();
 
-  // Récupérer la classe ayant la plus grande probabilité
-  const index = prediction.indexOf(Math.max(...prediction));
-
-  // Charger les informations de métadonnées
-  const metadata = await (await fetch('model/metadata.json')).json();
-
-  // Afficher le nom de la classe prédite
-  outputDiv.innerHTML = `Prédiction : ${metadata.class_names[index]}`;
-}
-
-inputImage.addEventListener('change', async () => {
-  const model = await loadModel();
-  predict(model);
-});
-</script>
+          // Display the predictions.
+          predictionDiv.innerHTML = '';
+          for (let i = 0; i < predictions.length; i++) {
+            const prediction = predictions[i];
+            const predictionPercentage = (prediction * 100).toFixed(2) + '%';
+            predictionDiv.innerHTML += `Class ${i}: ${predictionPercentage}<br>`;
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
