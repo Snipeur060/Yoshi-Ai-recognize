@@ -1,21 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My web app</title>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 
-    <!-- Custom style -->
-    <link rel="stylesheet" href="app.css" />
+<script>
+  async function load() {
+    const model = await tf.loadLayersModel('model/model.json');
+    return model;
+  };
 
-    <!-- Google font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <script src="app.js"></script>
-  </body>
-</html>
+  function predict(model) {
+    // first we get the value in the input field
+    const userInput = document.getElementById('userInput').value
+    const inputTensor = tf.tensor([parseInt(userInput)]);  // then convert to tensor
+
+    // now lets make the prediction, we use .then because the model is a promise
+    // (this is confusing as a Python user, but useful so check it out if interested)
+    model.then(model => {
+      let result = model.predict(inputTensor);
+      result = result.round().dataSync()[0];  // round prediction and get value
+      alert(result ? "odd" : "even");
+    });
+  };
+  
+  const model = load();  // load model immediately to avoid delay when user clicks 'Predict'
+</script>
+
+<input id="userInput" type="text"></input>
+
+<button onclick="predict(model)">Predict</button>
