@@ -1,45 +1,47 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.4.0/dist/tf.min.js"></script>
+    <meta charset="UTF-8">
+    <title>TensorFlow.js Image Classifier Example</title>
   </head>
   <body>
-    <input type="file" id="image-selector">
+    <h1>TensorFlow.js Image Classifier Example</h1>
+    <p>Upload an image to see the prediction:</p>
+    <input type="file" id="input">
     <br><br>
-    <div id="prediction"></div>
+    <img id="img" width="300" />
+    <br><br>
+    <p id="result"></p>
 
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
     <script>
-      const imageSelector = document.getElementById('image-selector');
-      const predictionDiv = document.getElementById('prediction');
+      async function run() {
+        // Load the model
+        const modelURL = 'model/model.json';
+        const model = await tf.loadLayersModel(modelURL);
 
-      // Load the model.
-      const modelURL = 'model/model.json';
-      const model = await tf.loadLayersModel(modelURL);
+        // Load the input image
+        const input = document.getElementById('input');
+        const img = document.getElementById('img');
+        img.src = URL.createObjectURL(input.files[0]);
 
-      // Load the image.
-      imageSelector.addEventListener('change', async () => {
-        const image = imageSelector.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = async () => {
-          const img = new Image();
-          img.src = reader.result;
-          img.width = 227;
-          img.height = 227;
-          document.body.appendChild(img);
+        // Pre-process the image
+        const image = tf.browser.fromPixels(img);
+        const imageResized = tf.image.resizeBilinear(image, [224, 224]);
+        const imageNormalized = imageResized.div(255.0);
+        const imageExpanded = imageNormalized.expandDims(0);
 
-          // Predict the image.
-          const tensor = tf.browser.fromPixels(img).resizeNearestNeighbor([227, 227]).toFloat().expandDims();
-          const predictions = await model.predict(tensor).data();
+        // Run the model
+        const prediction = model.predict(imageExpanded);
+        const scores = prediction.dataSync();
 
-          // Display the predictions.
-          predictionDiv.innerHTML = '';
-          for (let i = 0; i < predictions.length; i++) {
-            const prediction = predictions[i];
-            const predictionPercentage = (prediction * 100).toFixed(2) + '%';
-            predictionDiv.innerHTML += `Class ${i}: ${predictionPercentage}<br>`;
-          }
-        };
-      });
+        // Show the result
+        const classNames = ['Yoshi', 'Nothing'];
+        let index = scores.indexOf(Math.max(...scores));
+        document.getElementById('result').innerHTML = `Prediction: ${classNames[index]} (${(scores[index] * 100).toFixed(2)}%)`;
+      }
     </script>
+    <button onclick="run()">Predict</button>
   </body>
 </html>
