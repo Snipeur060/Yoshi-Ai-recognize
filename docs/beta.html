@@ -17,19 +17,17 @@
       }
       
       async function predict(model, image) {
-        // Preprocessing the input image
-        const tensor = tf.browser.fromPixels(image).resizeNearestNeighbor([224, 224]).toFloat();
-        const offset = tf.scalar(127.5);
-        const normalized = tensor.sub(offset).div(offset);
-        const expanded = normalized.expandDims();
-        
-        // Making predictions
-        const predictions = await model.predict(expanded).data();
+        const imageTensor = tf.browser.fromPixels(image).resizeNearestNeighbor([224,224]).toFloat().expandDims();
+        const predictions = await model.predict(imageTensor).data();
         const index = predictions.indexOf(Math.max(...predictions));
         
-        // Showing the predictions
-        document.getElementById("output").innerHTML = "La prédiction est: " + index + " avec une probabilité de " + predictions[index];
+        // Charger le fichier metadata.json pour obtenir les noms des classes
+        const metadata = await (await fetch("https://raw.githubusercontent.com/Snipeur060/Yoshi-Ai-recognize/main/docs/model/metadata.json")).json();
+        const className = metadata["output_labels"][index];
+        
+        document.getElementById("output").innerHTML = "La prédiction est: " + className + " avec une probabilité de " + predictions[index];
       }
+
       
       async function run() {
         const model = await loadModel();
