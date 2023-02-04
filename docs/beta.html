@@ -3,8 +3,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
 <script>
-const inputImage = document.getElementById('input-image');
-const outputDiv = document.getElementById('output');
+const fileReader = new FileReader();
+fileReader.readAsDataURL(file);
+fileReader.onload = async () => {
+  const image = new Image();
+  image.src = fileReader.result;
+  await image.decode();
+  const tensor = tf.browser.fromPixels(image);
+};
 
 async function loadModel() {
   // Charger le modèle entraîné
