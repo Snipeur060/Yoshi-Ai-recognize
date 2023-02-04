@@ -22,7 +22,7 @@
         const index = predictions.indexOf(Math.max(...predictions));
         
         // Charger le fichier metadata.json pour obtenir les noms des classes
-        const metadata = await (await fetch("https://raw.githubusercontent.com/Snipeur060/Yoshi-Ai-recognize/main/docs/model/metadata.json")).json();
+        const metadata = await (await fetch("model/metadata.json")).json();
         const className = metadata["output_labels"][index];
         
         document.getElementById("output").innerHTML = "La prédiction est: " + className + " avec une probabilité de " + predictions[index];
