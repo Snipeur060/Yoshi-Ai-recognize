@@ -38,6 +38,20 @@
           predict(model, image);
         };
       }
+      fetch("model/metadata.json")
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error(`Erreur lors du chargement du fichier metadata.json : ${response.statusText}`);
+    }
+  })
+  .then(data => {
+    console.log("Le fichier metadata.json a été correctement chargé : ", data);
+  })
+  .catch(error => {
+    console.error("Erreur lors du chargement du fichier metadata.json : ", error);
+  });
       
       document.getElementById("input-image").addEventListener("change", run);
     </script>
