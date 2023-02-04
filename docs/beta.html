@@ -1,47 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.8.0"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My web app</title>
+
+    <!-- Custom style -->
+    <link rel="stylesheet" href="app.css" />
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <input type="file" id="input-image">
-    <br><br>
-    <div id="prediction-div"></div>
-
-    <script>
-      async function predict() {
-        // Load the model.
-        const modelURL = 'model/model.json';
-        const model = await tf.loadLayersModel(modelURL);
-      
-        // Get the input image and add preprocessing.
-        const input = document.getElementById('input-image');
-        let image;
-        try {
-          image = await tf.browser.fromPixels(input);
-        } catch (error) {
-          console.error('Error preprocessing image: ', error);
-          return;
-        }
-      
-        // Predict the class probabilities.
-        let predictions;
-        try {
-          predictions = await model.predict(image.expandDims(0)).data();
-        } catch (error) {
-          console.error('Error making predictions: ', error);
-          return;
-        }
-      
-        // Display the class probabilities.
-        const predictionDiv = document.getElementById('prediction-div');
-        predictionDiv.innerHTML = '';
-        for (let i = 0; i < predictions.length; i++) {
-          predictionDiv.innerHTML += `Class ${i}: ${predictions[i].toFixed(4)}<br>`;
-        }
-      }
-
-      document.getElementById('input-image').addEventListener('change', predict);
-    </script>
+    <script src="app.js"></script>
   </body>
 </html>
