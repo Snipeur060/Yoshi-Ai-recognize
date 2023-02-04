@@ -1,59 +1,36 @@
+<input type="file" id="input-image" accept="image/*">
+<div id="output"></div>
 
-<html>
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.3.0/dist/tf.min.js"></script>
-  </head>
-  <body>
-    <input type="file" id="input-image">
-    <br><br>
-    <div id="output"></div>
-    
-    <script>
-      async function loadModel() {
-        const model = await tf.loadLayersModel('https://raw.githubusercontent.com/Snipeur060/Yoshi-Ai-recognize/main/docs/model/model.json', {
-          metadata: 'https://raw.githubusercontent.com/Snipeur060/Yoshi-Ai-recognize/main/docs/model/metadata.json'
-        });
-        return model;
-      }
-      
-      async function predict(model, image) {
-        const imageTensor = tf.browser.fromPixels(image).resizeNearestNeighbor([224,224]).toFloat().expandDims();
-        const predictions = await model.predict(imageTensor).data();
-        const index = predictions.indexOf(Math.max(...predictions));
-        
-        // Charger le fichier metadata.json pour obtenir les noms des classes
-        const metadata = await (await fetch("model/metadata.json")).json();
-        const className = metadata["output_labels"][index];
-        
-        document.getElementById("output").innerHTML = "La prédiction est: " + className + " avec une probabilité de " + predictions[index];
-      }
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+<script>
+const inputImage = document.getElementById('input-image');
+const outputDiv = document.getElementById('output');
 
-      
-      async function run() {
-        const model = await loadModel();
-        const inputImage = document.getElementById("input-image").files[0];
-        const image = new Image();
-        image.src = URL.createObjectURL(inputImage);
-        image.onload = () => {
-          predict(model, image);
-        };
-      }
-      fetch("model/metadata.json")
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(`Erreur lors du chargement du fichier metadata.json : ${response.statusText}`);
-    }
-  })
-  .then(data => {
-    console.log("Le fichier metadata.json a été correctement chargé : ", data);
-  })
-  .catch(error => {
-    console.error("Erreur lors du chargement du fichier metadata.json : ", error);
-  });
-      
-      document.getElementById("input-image").addEventListener("change", run);
-    </script>
-  </body>
-</html>
+async function loadModel() {
+  // Charger le modèle entraîné
+  const model = await tf.loadLayersModel("model/model.json');
+  return model;
+}
+
+async function predict(model) {
+  // Récupérer l'image sélectionnée par l'utilisateur
+  const image = inputImage.files[0];
+
+  // Prédire la classe de l'image en utilisant le modèle
+  const prediction = await model.predict(tf.browser.fromPixels(image)).data();
+
+  // Récupérer la classe ayant la plus grande probabilité
+  const index = prediction.indexOf(Math.max(...prediction));
+
+  // Charger les informations de métadonnées
+  const metadata = await (await fetch('model/metadata.json')).json();
+
+  // Afficher le nom de la classe prédite
+  outputDiv.innerHTML = `Prédiction : ${metadata.class_names[index]}`;
+}
+
+inputImage.addEventListener('change', async () => {
+  const model = await loadModel();
+  predict(model);
+});
+</script>
