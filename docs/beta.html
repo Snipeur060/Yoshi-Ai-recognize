@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0"></script>
+  </head>
+  <body>
+    <h1>Image Recognition with TensorFlow.js</h1>
+    <input type="file" id="image-selector" />
+    <br />
+    <br />
+    <div id="prediction-container"></div>
+  </body>
+  <script>
+    // Load the model.
+    const model = await tf.loadLayersModel('https://raw.githubusercontent.com/Snipeur060/Yoshi-Ai-recognize/main/docs/model/model.json');
+    
+    // Get a reference to the file input element.
+    const inputElement = document.getElementById('image-selector');
+    
+    // Add a change event listener to the input element.
+    inputElement.addEventListener('change', async function() {
+      // Get a reference to the selected file.
+      const file = inputElement.files[0];
+      
+      // Create an image tensor from the file.
+      const imageTensor = await tf.browser.fromPixels(file);
+      
+      // Use the model to make a prediction.
+      const prediction = await model.predict(imageTensor).data();
+      
+      // Get a reference to the prediction container element.
+      const predictionContainer = document.getElementById('prediction-container');
+      
+      // Update the prediction container with the prediction results.
+      predictionContainer.innerHTML = `Prediction: ${prediction}`;
+    });
+  </script>
+</html>
