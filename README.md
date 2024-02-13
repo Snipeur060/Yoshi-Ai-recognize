@@ -14,6 +14,10 @@
 
 <h2>Project Screenshots:</h2>
 <img src="https://github.com/Snipeur060/Yoshi-Ai-recognize/blob/main/readme_assets/gui_image.png?raw=true" alt="project-screenshot" width="350" height="250" />
+
+<h2>Web Version:</h2>
+
+<a target="_blank" href="https://snipeur060.github.io/Yoshi-Ai-recognize/">🌐 https://snipeur060.github.io/Yoshi-Ai-recognize/</a>
   
 <h2>🧐 Features</h2>
 
