@@ -1,0 +1,92 @@
+body {
+    background: #181a20;
+    color: #e5e6eb;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+div {
+    margin-top: 32px;
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+button[type="button"] {
+    background: linear-gradient(90deg,#41e1ce,#517aff 90%);
+    color: #fff;
+    border: none;
+    padding: 0.9em 2.5em;
+    border-radius: 2em;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 28px 0 0 0;
+    box-shadow: 0 4px 18px 0 rgba(80,220,255,0.10);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    outline: none;
+}
+button[type="button"]:hover {
+    background: linear-gradient(90deg,#517aff 10%,#41e1ce 100%);
+    transform: scale(1.04);
+    box-shadow: 0 2px 24px 0 rgba(80,220,255,0.20);
+}
+
+#webcam-container {
+    margin-top: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#webcam-container canvas {
+    border-radius: 14px;
+    box-shadow: 0 6px 42px 0 rgba(60,100,255,0.12);
+    background: #25262b;
+    margin: 0 auto;
+    display: block;
+    max-width: 100vw;
+}
+
+#label-container {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#label-container div {
+    font-size: 1.16rem;
+    font-weight: 500;
+    color: #c0f0fa;
+    background: rgba(40,60,80,0.17);
+    border-radius: 8px;
+    padding: 7px 22px;
+    margin-bottom: 11px;
+    box-shadow: 0 1px 6px 0 rgba(45,180,255,0.08);
+    transition: background 0.17s, color 0.17s;
+}
+#label-container div:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+    div {
+        font-size: 1.3rem;
+    }
+    #webcam-container {
+        margin-top: 20px;
+    }
+    button[type="button"] {
+        font-size: 1rem;
+        padding: 0.7em 1.4em;
+    }
+    #label-container div {
+        font-size: 0.99rem;
+        padding: 7px 10px;
+    }
+}
